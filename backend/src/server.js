@@ -6,6 +6,7 @@ dotenv.config();
 
 const app = express();
 const port = Number(process.env.PORT) || 4000;
+const host = process.env.HOST || "0.0.0.0";
 const allowedOrigin = process.env.FRONTEND_ORIGIN || "*";
 
 app.use(express.json());
@@ -23,6 +24,6 @@ app.get("/api/status", (_req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Backend listening on port ${port}`);
+app.listen(port, host, () => {
+  console.log(`Backend listening on http://${host}:${port}`);
 });
