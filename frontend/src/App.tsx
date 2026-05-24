@@ -10,6 +10,7 @@ import {
   Waypoints,
   Workflow,
 } from 'lucide-react';
+import NexumAtlas from './components/NexumAtlas';
 
 const NexumScene = lazy(() => import('./components/NexumScene'));
 
@@ -146,6 +147,8 @@ function App() {
           </p>
         </div>
       </section>
+
+      <NexumAtlas onCompanySignal={setActiveCompany} />
 
       <section className="companies-section" id="companies" aria-labelledby="companies-title">
         <div className="section-heading">
