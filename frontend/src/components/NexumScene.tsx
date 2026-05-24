@@ -1,5 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
 type CompanyKey = 'dc' | 'teq';
@@ -39,6 +39,7 @@ function Rail({ color, opacity, points }: RailProps) {
 function Lattice({ activeCompany }: LatticeProps) {
   const group = useRef<THREE.Group>(null);
   const inner = useRef<THREE.Group>(null);
+  const timer = useMemo(() => new THREE.Timer(), []);
 
   const points = useMemo(
     () => [
@@ -63,8 +64,17 @@ function Lattice({ activeCompany }: LatticeProps) {
     [points],
   );
 
-  useFrame((state) => {
-    const elapsed = state.clock.getElapsedTime();
+  useEffect(() => {
+    timer.connect(document);
+
+    return () => {
+      timer.dispose();
+    };
+  }, [timer]);
+
+  useFrame(() => {
+    timer.update();
+    const elapsed = timer.getElapsed();
 
     if (group.current) {
       group.current.rotation.y = Math.sin(elapsed * 0.18) * 0.18;

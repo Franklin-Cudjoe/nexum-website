@@ -264,6 +264,7 @@ h3 {
 .action-teq {
   border-color: color-mix(in srgb, var(--tech) 68%, white 8%);
   background: linear-gradient(135deg, rgba(98, 221, 255, 0.18), rgba(255, 255, 255, 0.08));
+  color: #ffffff;
 }
 
 .primary-action:hover,
@@ -318,9 +319,9 @@ h3 {
 
 .companies-section,
 .about-section,
-.atlas-section,
 .model-section,
 .flow-section,
+.company-page-section,
 .contact-section {
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
@@ -350,290 +351,6 @@ h3 {
   line-height: 1.65;
 }
 
-.atlas-section {
-  padding: 2.8rem 0 3.4rem;
-}
-
-.atlas-heading {
-  width: min(720px, 100%);
-}
-
-.atlas-layout {
-  display: grid;
-  grid-template-areas:
-    "map detail"
-    "balance detail";
-  grid-template-columns: minmax(0, 1.08fr) minmax(18rem, 0.74fr);
-  gap: 1rem;
-  align-items: stretch;
-  margin-top: 1.5rem;
-}
-
-.atlas-map {
-  position: relative;
-  grid-area: map;
-  min-height: 29rem;
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--atlas-accent) 36%, rgba(255, 255, 255, 0.18));
-  border-radius: 8px;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(145deg, color-mix(in srgb, var(--atlas-accent) 13%, transparent), transparent 42%, rgba(255, 255, 255, 0.055) 72%, transparent),
-    rgba(255, 255, 255, 0.035);
-  background-size: 32px 32px, 32px 32px, auto, auto;
-  box-shadow: 0 1.4rem 4.4rem rgba(0, 0, 0, 0.3);
-}
-
-.atlas-map::before {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(100deg, transparent 18%, color-mix(in srgb, var(--atlas-accent) 18%, transparent) 48%, transparent 72%);
-  content: "";
-  opacity: 0.6;
-  pointer-events: none;
-  transform: translateX(-105%);
-  animation: atlas-scan 6.8s ease-in-out infinite;
-}
-
-.atlas-route {
-  position: absolute;
-  inset: 5%;
-  width: 90%;
-  height: 90%;
-  overflow: visible;
-}
-
-.atlas-route polyline {
-  fill: none;
-  stroke: rgba(247, 251, 255, 0.2);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 0.7;
-  vector-effect: non-scaling-stroke;
-}
-
-.atlas-route .atlas-route-glow {
-  stroke: var(--atlas-accent);
-  stroke-dasharray: 11 13;
-  stroke-width: 1.05;
-  filter: drop-shadow(0 0 0.55rem var(--atlas-accent));
-  animation: atlas-route 4.8s linear infinite;
-}
-
-.atlas-core {
-  position: absolute;
-  top: 51%;
-  left: 52%;
-  z-index: 2;
-  display: grid;
-  width: 8.8rem;
-  height: 8.8rem;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--atlas-accent) 42%, rgba(255, 255, 255, 0.18));
-  border-radius: 50%;
-  background: rgba(8, 11, 15, 0.74);
-  box-shadow:
-    inset 0 0 2.2rem rgba(255, 255, 255, 0.06),
-    0 0 2.8rem color-mix(in srgb, var(--atlas-accent) 22%, transparent);
-  transform: translate(-50%, -50%);
-}
-
-.atlas-core span {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-items: center;
-  border: 1px solid rgba(73, 229, 157, 0.52);
-  border-radius: 8px;
-  color: var(--green);
-  font-weight: 900;
-}
-
-.atlas-core strong {
-  color: #ffffff;
-  font-size: 0.88rem;
-}
-
-.atlas-ring {
-  position: absolute;
-  top: 51%;
-  left: 52%;
-  width: 16rem;
-  height: 16rem;
-  border: 1px solid color-mix(in srgb, var(--atlas-accent) 28%, transparent);
-  border-radius: 42% 58% 48% 52%;
-  pointer-events: none;
-  transform: translate(-50%, -50%) rotate(0deg);
-  animation: atlas-ring 16s linear infinite;
-}
-
-.atlas-ring--two {
-  width: 22rem;
-  height: 14rem;
-  border-color: rgba(247, 251, 255, 0.12);
-  border-radius: 58% 42% 55% 45%;
-  animation-duration: 23s;
-  animation-direction: reverse;
-}
-
-.atlas-station {
-  position: absolute;
-  top: var(--station-y);
-  left: var(--station-x);
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.42rem;
-  min-height: 2.75rem;
-  max-width: min(11rem, 42%);
-  padding: 0.52rem 0.68rem;
-  border: 1px solid color-mix(in srgb, var(--station-accent) 42%, rgba(255, 255, 255, 0.18));
-  border-radius: 8px;
-  background: rgba(8, 11, 15, 0.78);
-  color: rgba(247, 251, 255, 0.84);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.76rem;
-  font-weight: 900;
-  text-align: left;
-  transform: translate(-50%, -50%);
-  transition:
-    background 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-  animation: atlas-arrive 460ms ease both;
-  animation-delay: var(--station-delay);
-}
-
-.atlas-station svg {
-  flex: 0 0 auto;
-  color: var(--station-accent);
-}
-
-.atlas-station:hover,
-.atlas-station:focus-visible,
-.atlas-station.is-active {
-  border-color: color-mix(in srgb, var(--station-accent) 72%, white 10%);
-  background: color-mix(in srgb, var(--station-accent) 16%, rgba(8, 11, 15, 0.85));
-  box-shadow: 0 0 1.4rem color-mix(in srgb, var(--station-accent) 28%, transparent);
-  color: #ffffff;
-  transform: translate(-50%, -50%) translateY(-2px);
-}
-
-.atlas-station.is-active::after {
-  position: absolute;
-  inset: -0.45rem;
-  border: 1px solid color-mix(in srgb, var(--station-accent) 52%, transparent);
-  border-radius: 10px;
-  content: "";
-  pointer-events: none;
-  animation: atlas-pulse 1.8s ease-in-out infinite;
-}
-
-.atlas-detail {
-  display: flex;
-  grid-area: detail;
-  flex-direction: column;
-  min-height: 29rem;
-  padding: 1.25rem;
-  border: 1px solid color-mix(in srgb, var(--atlas-accent) 34%, rgba(255, 255, 255, 0.16));
-  border-radius: 8px;
-  background:
-    linear-gradient(150deg, color-mix(in srgb, var(--atlas-accent) 14%, transparent), rgba(255, 255, 255, 0.035) 46%),
-    rgba(255, 255, 255, 0.045);
-  box-shadow: 0 1.4rem 4.4rem rgba(0, 0, 0, 0.26);
-}
-
-.atlas-detail-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.58rem;
-  color: var(--atlas-accent);
-  font-size: 0.76rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.atlas-detail h3 {
-  margin: 2rem 0 0.8rem;
-  font-size: 1.85rem;
-}
-
-.atlas-detail p {
-  color: rgba(247, 251, 255, 0.72);
-  font-size: 0.96rem;
-  line-height: 1.62;
-}
-
-.atlas-signal-stack {
-  display: grid;
-  gap: 0.56rem;
-  margin: auto 0 1.2rem;
-}
-
-.atlas-signal-stack span,
-.atlas-balance span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.45rem;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.045);
-  color: var(--muted);
-  font-size: 0.8rem;
-  font-weight: 800;
-}
-
-.atlas-signal-stack span {
-  padding: 0.58rem 0.72rem;
-}
-
-.atlas-link {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  justify-content: center;
-  gap: 0.42rem;
-  min-height: 2.6rem;
-  padding: 0.62rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--atlas-accent) 46%, rgba(255, 255, 255, 0.16));
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--atlas-accent) 14%, rgba(255, 255, 255, 0.045));
-  color: #ffffff;
-  font-size: 0.84rem;
-  font-weight: 900;
-  transition:
-    background 180ms ease,
-    transform 180ms ease;
-}
-
-.atlas-link:hover,
-.atlas-link:focus-visible {
-  background: color-mix(in srgb, var(--atlas-accent) 22%, rgba(255, 255, 255, 0.06));
-  transform: translateY(-2px);
-}
-
-.atlas-balance {
-  display: grid;
-  grid-area: balance;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.72rem;
-}
-
-.atlas-balance span {
-  gap: 0.48rem;
-  padding: 0.58rem 0.72rem;
-}
-
-.atlas-balance span.is-active {
-  border-color: color-mix(in srgb, var(--atlas-accent) 58%, white 8%);
-  background: color-mix(in srgb, var(--atlas-accent) 15%, rgba(255, 255, 255, 0.04));
-  color: #ffffff;
-}
-
 .companies-section {
   padding: 3rem 0 3.4rem;
 }
@@ -654,10 +371,14 @@ h3 {
 
 .company-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(8rem, 0.32fr) minmax(0, 1fr);
-  gap: 0.85rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
   align-items: stretch;
   margin-top: 1.8rem;
+}
+
+.company-grid--directory {
+  align-items: stretch;
 }
 
 .company-card,
@@ -777,62 +498,6 @@ h3 {
   background: rgba(255, 255, 255, 0.075);
 }
 
-.nexus-bridge {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.72rem;
-  padding: 0.8rem 0;
-}
-
-.bridge-dot {
-  width: 0.72rem;
-  height: 0.72rem;
-  border: 1px solid rgba(73, 229, 157, 0.8);
-  border-radius: 50%;
-  background: rgba(73, 229, 157, 0.24);
-}
-
-.bridge-line {
-  width: 1px;
-  min-height: 3.8rem;
-  flex: 1;
-  background: linear-gradient(180deg, var(--industrial), var(--green), var(--tech));
-}
-
-.bridge-copy {
-  display: grid;
-  width: 100%;
-  justify-items: center;
-  gap: 0.42rem;
-  padding: 0.75rem 0.55rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.055);
-  text-align: center;
-}
-
-.bridge-copy svg {
-  color: var(--green);
-}
-
-.bridge-copy strong,
-.bridge-copy span {
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.bridge-copy strong {
-  color: #ffffff;
-}
-
-.bridge-copy span {
-  color: var(--muted);
-}
-
 .model-section {
   display: grid;
   grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
@@ -922,6 +587,76 @@ h3 {
   line-height: 1.35;
 }
 
+.company-hero {
+  min-height: 86vh;
+}
+
+.company-hero .hero-content {
+  width: min(760px, 100%);
+}
+
+.company-hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--company-accent) 16%, transparent), transparent 52%);
+  content: "";
+  pointer-events: none;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: #ffffff;
+}
+
+.company-strip {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  align-self: end;
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--company-accent) 34%, rgba(255, 255, 255, 0.18));
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.company-strip div {
+  min-width: 0;
+  padding: 1rem;
+  background: rgba(8, 11, 15, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+.company-strip strong {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.company-page-section {
+  padding: 4rem 0 1.8rem;
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 .contact-section {
   justify-content: space-between;
   margin-bottom: 1rem;
@@ -952,39 +687,9 @@ h3 {
 
   .model-section,
   .about-section,
-  .atlas-layout,
+  .capability-grid,
   .company-grid {
     grid-template-columns: 1fr;
-  }
-
-  .atlas-layout {
-    grid-template-areas:
-      "map"
-      "detail"
-      "balance";
-  }
-
-  .atlas-map,
-  .atlas-detail {
-    min-height: 25rem;
-  }
-
-  .nexus-bridge {
-    min-height: 5.2rem;
-    flex-direction: row;
-    padding: 0.1rem 0.4rem;
-  }
-
-  .bridge-line {
-    width: auto;
-    min-width: 2.5rem;
-    min-height: 1px;
-    height: 1px;
-    background: linear-gradient(90deg, var(--industrial), var(--green), var(--tech));
-  }
-
-  .bridge-copy {
-    width: min(18rem, 100%);
   }
 
   .model-copy {
@@ -1047,52 +752,6 @@ h3 {
     font-size: 0.94rem;
   }
 
-  .atlas-map {
-    min-height: 31rem;
-  }
-
-  .atlas-core {
-    width: 7.2rem;
-    height: 7.2rem;
-  }
-
-  .atlas-ring {
-    width: 13rem;
-    height: 13rem;
-  }
-
-  .atlas-ring--two {
-    width: 18rem;
-    height: 12rem;
-  }
-
-  .atlas-station {
-    gap: 0.32rem;
-    min-height: 2.42rem;
-    max-width: 46%;
-    padding: 0.45rem 0.52rem;
-    font-size: 0.68rem;
-  }
-
-  .atlas-station svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .atlas-detail {
-    min-height: auto;
-    padding: 1rem;
-  }
-
-  .atlas-detail h3 {
-    margin-top: 1.5rem;
-    font-size: 1.36rem;
-  }
-
-  .atlas-balance {
-    grid-template-columns: 1fr;
-  }
-
   .primary-action,
   .secondary-action {
     width: 100%;
@@ -1122,13 +781,12 @@ h3 {
     font-size: 1.76rem;
   }
 
-  .company-title {
-    font-size: 0.96rem;
+  .company-strip {
+    grid-template-columns: 1fr;
   }
 
-  .bridge-copy {
-    gap: 0.32rem;
-    padding: 0.68rem 0.5rem;
+  .company-title {
+    font-size: 0.96rem;
   }
 
   .strength-grid,
@@ -1149,68 +807,5 @@ h3 {
 
   .contact-section {
     padding: 1.1rem;
-  }
-}
-
-@keyframes atlas-scan {
-  0%,
-  42% {
-    transform: translateX(-105%);
-  }
-
-  62%,
-  100% {
-    transform: translateX(105%);
-  }
-}
-
-@keyframes atlas-route {
-  to {
-    stroke-dashoffset: -48;
-  }
-}
-
-@keyframes atlas-ring {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-@keyframes atlas-arrive {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) translateY(0.4rem);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-@keyframes atlas-pulse {
-  0%,
-  100% {
-    opacity: 0.24;
-    transform: scale(0.94);
-  }
-
-  50% {
-    opacity: 0.82;
-    transform: scale(1.04);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .atlas-map::before,
-  .atlas-route .atlas-route-glow,
-  .atlas-ring,
-  .atlas-station,
-  .atlas-station.is-active::after {
-    animation: none;
   }
 }
